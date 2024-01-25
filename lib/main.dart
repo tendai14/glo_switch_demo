@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:glow_switch/app_blocs.dart';
 import 'package:glow_switch/app_repositories.dart';
-import 'package:glow_switch/ui/create_user_page.dart';
 import 'package:glow_switch/ui/posts_page.dart';
 
 Future<void> main() async {
