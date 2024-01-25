@@ -11,25 +11,21 @@ part 'user_state.dart';
 
 class UserBloc extends Bloc<UserEvent, UserState> {
   final DataRepository dataRepository;
-  UserBloc({required this.dataRepository}) : super(UserInitial());
-
-  @override
-  Stream<UserState> mapEventToState(UserEvent event) async* {
-    // ignore: avoid_print
-    print("in data bloc");
-
-    if (event is CreateUserEvent) {
-      yield UserLoadingState();
-      try {
-        // ignore: avoid_print
-        print("in user bloc");
-        UserResponseModel userResponse =
-            await dataRepository.createUser(event.userModel);
-        log(userResponse.toString());
-        yield UserLoadedState(userResponseModel: userResponse);
-      } catch (e) {
-        yield UserErrorState(errorMessage: e.toString());
+  UserBloc({required this.dataRepository}) : super(UserInitial()) {
+    on<UserEvent>((event, emit) async {
+      if (event is CreateUserEvent) {
+        emit(UserLoadingState());
+        try {
+          // ignore: avoid_print
+          print("in user bloc");
+          UserResponseModel userResponse =
+              await dataRepository.createUser(event.userModel);
+          log(userResponse.toString());
+          emit(UserLoadedState(userResponseModel: userResponse));
+        } catch (e) {
+          emit(UserErrorState(errorMessage: e.toString()));
+        }
       }
-    }
+    });
   }
 }
