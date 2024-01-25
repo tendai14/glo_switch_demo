@@ -157,7 +157,7 @@ class _CreateUserPageState extends State<CreateUserPage> {
                       borderSide: const BorderSide(width: 2)),
                   filled: true,
                   hintStyle: const TextStyle(fontSize: 13),
-                  hintText: "User",
+                  hintText: "Type",
                   fillColor: Colors.white,
                   // errorText: _validate ? 'Username Can\'t Be Empty' : null
                 ),
